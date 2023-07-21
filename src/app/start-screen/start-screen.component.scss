@@ -1,0 +1,32 @@
+.start_screen {
+    background-image: url('./../../assets/img/background.jpg');
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.start_screen_terminal {
+    background-image: url('./../../assets/img/startbox.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+    width: 1024px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.start_btn {
+    width: 30%;
+    position: absolute;
+    bottom: 25vh;
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(1.1);
+    }
+}
