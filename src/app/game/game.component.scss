@@ -28,7 +28,12 @@
 }
 
 .pick_card {
-    animation: pick_card_animation 1s ease-in-out;
+    animation: pick_card_animation 1000ms ease-in-out;
+    transform: scale(1) translateX(150px) translateY(-300px) rotate(-10deg);
+}
+
+.playedCards {
+    right: 20px;
     transform: scale(1) translateX(150px) translateY(-300px) rotate(-10deg);
 }
 
