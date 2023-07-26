@@ -54,3 +54,14 @@
         transform: scale(1) translateX(150px) translateY(-300px) rotate(-10deg);
     }
 }
+
+.player_position {
+    position: absolute;
+    right: 0;
+}
+
+.add_player_btn {
+    position: absolute;
+    right: 32px;
+    bottom: 32px;
+}
