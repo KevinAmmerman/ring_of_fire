@@ -22,26 +22,30 @@ export class GameComponent implements OnInit {
 
   newGame() {
     this.game = new Game;
-    console.log(this.game);
   }
 
   takeCard() {
     if (!this.pickCardAnimation) {
       this.currentCard = this.game.stack.pop();
       this.pickCardAnimation = true;
-      console.log(this.currentCard);
       setTimeout(() => {
         this.game.playedCards.push(this.currentCard);
+        this.nextPlayer();
         setTimeout(() => this.pickCardAnimation = false, 100);
       }, 1000);
     }
   }
 
+  nextPlayer() {
+    this.game.currentPlayer++;
+    this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      
+    dialogRef.afterClosed().subscribe((name: string) => {
+      this.game.players.push(name);
     });
   }
 
