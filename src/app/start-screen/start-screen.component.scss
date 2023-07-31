@@ -1,5 +1,5 @@
 .start_screen {
-    background-image: url('./../../assets/img/background.jpg');
+    background-image: url('~src/assets/img/background.jpg');
     background-size: cover;
     width: 100vw;
     height: 100vh;
@@ -9,7 +9,7 @@
 }
 
 .start_screen_terminal {
-    background-image: url('./../../assets/img/startbox.png');
+    background-image: url('~src/assets/img/startbox.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -17,11 +17,12 @@
     width: 1024px;
     display: flex;
     justify-content: center;
-    align-items: end;
+    align-items: flex-end;
 }
 
 .start_btn {
     width: 30%;
+    height: 10%;
     position: absolute;
     bottom: 25vh;
     cursor: pointer;
