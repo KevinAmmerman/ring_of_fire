@@ -7,6 +7,10 @@ import { Component, Input } from '@angular/core';
 })
 export class PlayerComponent {
 
-  @Input() name: string;
+  @Input() data: {
+    name: string;
+    index: number;
+    playersCount: number;
+  }
   @Input() playerActive: boolean = false;
 }

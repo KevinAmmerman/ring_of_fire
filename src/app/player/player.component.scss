@@ -1,45 +1,49 @@
 .player {
-    display: flex;
-    align-items: center;
-    width: 200px;
-    background-color: rgba(0,0,0, 0.5);
-    padding: 8px;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    transform: translateX(250px);
+  display: flex;
+  align-items: center;
+  width: 200px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 8px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  transform: translateX(250px);
 
-    img {
-        width: 50px;
-        height: 50px;
-    }
-    
-    span {
-        font-size: 22px;
-        margin-left: 16px;
-        color: white;
-    }
+  img {
+    width: 50px;
+    height: 50px;
+    transform: rotate(45deg);
+  }
+
+  span {
+    font-size: 22px;
+    margin-left: 16px;
+    color: white;
+  }
+
+  .playerCount {
+    transform: rotate(90deg);
+    position: absolute;
+    right: 5px;
+    font-size: 15px;
+  }
 }
 
 .player_active {
-    transform: translateX(0);
-    animation: slideIn 0.5s ease-out;
-    background-color: orange;
+  transform: translateX(0);
+  animation: slideIn 0.5s ease-out;
+  background-color: orange;
 
-    span {
-        color: black;
-    }
+  span {
+    color: black;
+  }
 }
 
 @keyframes slideIn {
-    from {
-      transform: translateX(250px); 
-    }
-    
-    to {
-      transform: translateX(0);
-    }
+  from {
+    transform: translateX(250px);
   }
 
-@media (max-width: 800px) {
-
+  to {
+    transform: translateX(0);
+  }
 }
