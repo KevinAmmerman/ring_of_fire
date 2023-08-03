@@ -1,9 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Game } from 'src/models/game';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
-import { Firestore, collection, collectionData, doc, setDoc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, doc, docData, setDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-game',
@@ -19,28 +20,35 @@ export class GameComponent implements OnInit {
 
   ngOnInit(): void {
     this.newGame()
+    this.route.params.subscribe((params) => {
+      console.log(params['id'])
+      const id = params['id'];
+      const itemDoc = doc(this.firestore, 'games', id);
+      this.game$ = docData(itemDoc);
+      this.game$.subscribe( (game) => {
+        this.game.currentPlayer = game.currentPlayer;
+        this.game.playedCards = game.playedCards;
+        this.game.players = game.players;
+        this.game.stack = game.stack;
+      });
+    })
   }
 
-  constructor(public dialog: MatDialog) {
-    const itemCollection = collection(this.firestore, 'games');
-    this.game$ = collectionData(itemCollection, {
-      idField: 'id'
-    });
+  constructor(public dialog: MatDialog, private route: ActivatedRoute) {
+    // const itemCollection = collection(this.firestore, 'games');
+    // this.game$ = collectionData(itemCollection, {
+    //   // idField: 'id'
+    // });
 
-    this.game$.subscribe((todo) => {
-      // for(let todos of todo) {
-      //   console.log(todos.id); 
-      // }
-      for(let todos of todo) {
-        console.log(todos);
-      }
-    });
+    // this.game$.subscribe((todo) => {
+    //   for (let todos of todo) {
+    //     console.log(todos);
+    //   }
+    // });
   }
 
   newGame() {
     this.game = new Game;
-    const itemCollection = collection(this.firestore, 'games');
-    setDoc(doc(itemCollection, "" + Date.now()), this.game.toJson());
   }
 
   takeCard() {
