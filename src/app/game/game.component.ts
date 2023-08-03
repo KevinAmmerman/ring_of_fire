@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
-import { Firestore, collection, collectionData, doc, docData, setDoc } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, doc, docData, setDoc, updateDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
@@ -12,53 +12,43 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
-  pickCardAnimation = false;
   game: Game;
-  currentCard: string = '';
-  game$: Observable<any>;
+  gameId: string;
   firestore: Firestore = inject(Firestore)
 
   ngOnInit(): void {
     this.newGame()
     this.route.params.subscribe((params) => {
       console.log(params['id'])
-      const id = params['id'];
-      const itemDoc = doc(this.firestore, 'games', id);
-      this.game$ = docData(itemDoc);
-      this.game$.subscribe( (game) => {
+      this.gameId = params['id'];
+      const itemDoc = doc(this.firestore, 'games', this.gameId);
+      docData(itemDoc).subscribe((game: any) => {
         this.game.currentPlayer = game.currentPlayer;
         this.game.playedCards = game.playedCards;
         this.game.players = game.players;
         this.game.stack = game.stack;
+        this.game.pickCardAnimation = game.pickCardAnimation;
+        this.game.currentCard = game.currentCard;
       });
     })
   }
 
-  constructor(public dialog: MatDialog, private route: ActivatedRoute) {
-    // const itemCollection = collection(this.firestore, 'games');
-    // this.game$ = collectionData(itemCollection, {
-    //   // idField: 'id'
-    // });
-
-    // this.game$.subscribe((todo) => {
-    //   for (let todos of todo) {
-    //     console.log(todos);
-    //   }
-    // });
-  }
+  constructor(public dialog: MatDialog, private route: ActivatedRoute) { }
 
   newGame() {
     this.game = new Game;
   }
 
   takeCard() {
-    if (!this.pickCardAnimation) {
-      this.currentCard = this.game.stack.pop();
-      this.pickCardAnimation = true;
+    if (!this.game.pickCardAnimation) {
+      this.game.currentCard = this.game.stack.pop();
+      this.game.pickCardAnimation = true;
+      this.updateGame();
       setTimeout(() => {
-        this.game.playedCards.push(this.currentCard);
+        this.game.playedCards.push(this.game.currentCard);
         this.nextPlayer();
-        setTimeout(() => this.pickCardAnimation = false, 100);
+        this.game.pickCardAnimation = false, 100
+        this.updateGame();
       }, 1000);
     }
   }
@@ -66,6 +56,7 @@ export class GameComponent implements OnInit {
   nextPlayer() {
     this.game.currentPlayer++;
     this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+    this.updateGame();
   }
 
   openDialog(): void {
@@ -74,8 +65,14 @@ export class GameComponent implements OnInit {
     dialogRef.afterClosed().subscribe((name: string) => {
       if (name && name.length > 0) {
         this.game.players.push(name);
+        this.updateGame();
       }
     });
+  }
+
+  updateGame() {
+    const itemDoc = doc(this.firestore, 'games', this.gameId);
+    updateDoc(itemDoc, this.game.toJson());
   }
 
 }
