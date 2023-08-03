@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ring-of-fire-dc17b": {
+      "hosting": {
+        "ringoffire": [
+          "ring-of-fire-dc17b"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ring-of-fire-dc17b"
+  }
+}
