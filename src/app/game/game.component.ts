@@ -16,6 +16,8 @@ export class GameComponent implements OnInit {
   gameId: string;
   firestore: Firestore = inject(Firestore)
 
+  constructor(public dialog: MatDialog, private route: ActivatedRoute) { }
+
   ngOnInit(): void {
     this.newGame()
     this.route.params.subscribe((params) => {
@@ -33,11 +35,11 @@ export class GameComponent implements OnInit {
     })
   }
 
-  constructor(public dialog: MatDialog, private route: ActivatedRoute) { }
 
   newGame() {
     this.game = new Game;
   }
+
 
   takeCard() {
     if (!this.game.pickCardAnimation) {
@@ -53,11 +55,13 @@ export class GameComponent implements OnInit {
     }
   }
 
+
   nextPlayer() {
     this.game.currentPlayer++;
     this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
     this.updateGame();
   }
+
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
@@ -70,6 +74,7 @@ export class GameComponent implements OnInit {
     });
   }
 
+  
   updateGame() {
     const itemDoc = doc(this.firestore, 'games', this.gameId);
     updateDoc(itemDoc, this.game.toJson());

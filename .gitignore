@@ -45,3 +45,9 @@ Thumbs.db
 .firebase
 *-debug.log
 .runtimeconfig.json
+firestore.rules
+firestore.indexes.json
+database.rules.json
+/ringoffire
+/public
+/functions
