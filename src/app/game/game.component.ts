@@ -96,9 +96,27 @@ export class GameComponent implements OnInit {
 
 
   openDialogEditPlayer(i: number): void {
-    const dialogRef = this.dialog.open(EditPlayerComponent);
+    const dialogRef = this.handleDialogEditPlayerOpen(i)
     dialogRef.afterClosed().subscribe((edit) => {
-      if (!edit) return;
+      this.handleDialogEditPlayerClose(edit, i);
+    });
+    this.updateGame();
+  }
+
+
+  handleDialogEditPlayerOpen(i: number) {
+    return this.dialog.open(EditPlayerComponent, {
+      data: {
+        playerIndex: i,
+        game: this.game,
+        update: () => this.updateGame()
+      }
+    });
+  }
+
+  
+  handleDialogEditPlayerClose(edit: any, i: number) {
+    if (!edit) return;
       else if (edit.name == '' && edit.picture.length > 0) {
         this.game.players_picture[i] = edit.picture;
       } else if (edit.picture == undefined && edit.length > 0) {
@@ -107,8 +125,6 @@ export class GameComponent implements OnInit {
         this.game.players[i] = edit.name;
         this.game.players_picture[i] = edit.picture;
       }
-    });
-    this.updateGame();
   }
 
 
