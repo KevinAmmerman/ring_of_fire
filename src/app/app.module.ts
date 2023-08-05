@@ -21,6 +21,7 @@ import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { PlayerPictureComponent } from './player-picture/player-picture.component';
 import { EditPlayerComponent } from './edit-player/edit-player.component';
+import { Game } from 'src/models/game';
 
 @NgModule({
   declarations: [

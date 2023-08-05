@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Game } from 'src/models/game';
 
 @Component({
   selector: 'app-edit-player',
@@ -8,11 +7,14 @@ import { Game } from 'src/models/game';
 })
 export class EditPlayerComponent {
 
-  game: Game;
   name: string = '';
   playerPictures: string[] = ['person.png', 'player_one_f.png', 'player_one_m.png', 'player_two_f.png', 'player_two_m.png', 'player_three_f.png', 'player_three_m.png'];
 
-  deletePlayer(): void {
+  constructor() {}
 
+  deletePlayer(): void {
+    // let index = this.game.editPlayer;
+    // this.game.players.splice(index, 1)
+    // this.game.players_picture.splice(index, 1)
   }
 }

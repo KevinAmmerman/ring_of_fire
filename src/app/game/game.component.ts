@@ -98,7 +98,8 @@ export class GameComponent implements OnInit {
   openDialogEditPlayer(i: number): void {
     const dialogRef = this.dialog.open(EditPlayerComponent);
     dialogRef.afterClosed().subscribe((edit) => {
-      if (edit.name == '' && edit.picture.length > 0) {
+      if (!edit) return;
+      else if (edit.name == '' && edit.picture.length > 0) {
         this.game.players_picture[i] = edit.picture;
       } else if (edit.picture == undefined && edit.length > 0) {
         this.game.players[i] = edit;

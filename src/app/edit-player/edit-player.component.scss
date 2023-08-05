@@ -1,0 +1,16 @@
+.avatar_container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    img {
+        width: 60px;
+        height: 60px;
+        margin: 0 3px 0 3px;
+        cursor: pointer;
+
+        &:hover {
+            filter: brightness(1.25);
+        }
+    }
+}
