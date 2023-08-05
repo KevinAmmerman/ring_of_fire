@@ -14,7 +14,6 @@ export class StartScreenComponent {
   constructor(private router: Router) { }
 
   newGame() {
-    debugger
     let game = new Game();
     const itemCollection = collection(this.firestore, 'games');
     const id = "" + Date.now();

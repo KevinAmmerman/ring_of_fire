@@ -1,0 +1,7 @@
+<div class="container">
+    <h1 mat-dialog-title>Pick your avatar</h1>
+    <div class="avatar_container">
+        <img [mat-dialog-close]="picture" *ngFor="let picture of playerPictures"
+        src="assets/img/player_pictures/{{ picture }}" alt="">
+    </div>
+</div>

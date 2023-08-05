@@ -2,9 +2,10 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
-import { Firestore, collection, collectionData, doc, docData, setDoc, updateDoc } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Firestore, doc, docData, updateDoc } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
+import { PlayerPictureComponent } from '../player-picture/player-picture.component';
+import { EditPlayerComponent } from '../edit-player/edit-player.component';
 
 @Component({
   selector: 'app-game',
@@ -12,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
+  playerPictures: string[] = ['person.png', 'player_one_f.png', 'player_one_m.png', 'player_two_f.png', 'player_two_m.png', 'player_three_f.png', 'player_three_m.png'];
   game: Game;
   gameId: string;
   firestore: Firestore = inject(Firestore)
@@ -28,6 +30,7 @@ export class GameComponent implements OnInit {
         this.game.currentPlayer = game.currentPlayer;
         this.game.playedCards = game.playedCards;
         this.game.players = game.players;
+        this.game.players_picture = game.players_picture
         this.game.stack = game.stack;
         this.game.pickCardAnimation = game.pickCardAnimation;
         this.game.currentCard = game.currentCard;
@@ -68,13 +71,45 @@ export class GameComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((name: string) => {
       if (name && name.length > 0) {
-        this.game.players.push(name);
-        this.updateGame();
+        this.openDialogForPicture(name);
       }
     });
   }
 
-  
+  openDialogForPicture(name: string): void {
+    const dialogRef = this.dialog.open(PlayerPictureComponent);
+    dialogRef.afterClosed().subscribe(picture => {
+      if (picture == undefined) {
+        this.setPlayer(name, 'person.png');
+      } else {
+        this.setPlayer(name, picture);
+      }
+    });
+  }
+
+
+  setPlayer(name: string, picture: string) {
+    this.game.players.push(name);
+    this.game.players_picture.push(picture);
+    this.updateGame();
+  }
+
+
+  openDialogEditPlayer(i: number): void {
+    const dialogRef = this.dialog.open(EditPlayerComponent);
+    dialogRef.afterClosed().subscribe((edit) => {
+      if (edit.name == '' && edit.picture.length > 0) {
+        this.game.players_picture[i] = edit.picture;
+      } else if (edit.picture == undefined && edit.length > 0) {
+        this.game.players[i] = edit;
+      } else if (edit.name.length > 0 && edit.picture.length > 0) {
+        this.game.players[i] = edit.name;
+        this.game.players_picture[i] = edit.picture;
+      }
+    });
+  }
+
+
   updateGame() {
     const itemDoc = doc(this.firestore, 'games', this.gameId);
     updateDoc(itemDoc, this.game.toJson());

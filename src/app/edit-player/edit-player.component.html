@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Edit player</h1>
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="name">
+    </mat-form-field>
+    <div class="avatar_container">
+        <img [mat-dialog-close]="{'picture': picture, 'name': name}" *ngFor="let picture of playerPictures"
+            src="assets/img/player_pictures/{{ picture }}" alt="">
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="deletePlayer()">delete player</button>
+    <button mat-button [disabled]="name.length == 0" [mat-dialog-close]="name" cdkFocusInitial>Ok</button>
+</div>

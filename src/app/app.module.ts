@@ -19,6 +19,8 @@ import {MatCardModule} from '@angular/material/card';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { PlayerPictureComponent } from './player-picture/player-picture.component';
+import { EditPlayerComponent } from './edit-player/edit-player.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     GameComponent,
     PlayerComponent,
     DialogAddPlayerComponent,
-    GameTaskCardComponent
+    GameTaskCardComponent,
+    PlayerPictureComponent,
+    EditPlayerComponent
   ],
   imports: [
     BrowserModule,

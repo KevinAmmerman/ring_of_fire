@@ -11,6 +11,10 @@ export class PlayerComponent {
     name: string;
     index: number;
     playersCount: number;
+    player_avatar: string;
   }
   @Input() playerActive: boolean = false;
+
+  constructor() {}
+
 }

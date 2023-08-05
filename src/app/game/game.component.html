@@ -1,4 +1,4 @@
-<app-player *ngFor="let player of game.players; let i = index" [data]="{'name': player, 'index': i, 'playersCount': game.players.length}" [playerActive]="i == game.currentPlayer"
+<app-player (click)="openDialogEditPlayer(i)" *ngFor="let player of game.players; let i = index" [data]="{'name': player, 'index': i, 'playersCount': game.players.length, 'player_avatar': game.players_picture[i]}" [playerActive]="i == game.currentPlayer"
     class="player_position"></app-player>
 <div class="game_field">
     <div class="card_stack">
