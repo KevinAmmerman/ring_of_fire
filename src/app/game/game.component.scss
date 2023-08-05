@@ -59,8 +59,12 @@
 .player_position {
     position: absolute;
     left: -25px;
-    top: 75px;
+    top: -140px;
     transform: rotate(-90deg);
+}
+
+.player_active {
+    top: 75px;
 }
 
 .add_player_btn {

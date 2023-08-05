@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
@@ -107,6 +107,7 @@ export class GameComponent implements OnInit {
         this.game.players_picture[i] = edit.picture;
       }
     });
+    this.updateGame();
   }
 
 
