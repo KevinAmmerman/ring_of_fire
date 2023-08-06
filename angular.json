@@ -27,7 +27,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/assets/favicon",
-              "src/assets"
+              "src/assets",
+              "src/assets/fonts"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
