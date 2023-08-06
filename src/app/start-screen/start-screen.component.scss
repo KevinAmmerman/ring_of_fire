@@ -48,3 +48,12 @@
         filter: brightness(1.15);
     }
 }
+
+@media (max-width: 414px) {
+
+    .start_btn {
+        width: 50%;
+        height: 10%;
+        bottom: 33vh;
+    }
+}
