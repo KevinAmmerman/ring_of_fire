@@ -2,6 +2,8 @@ import { Component, inject } from '@angular/core';
 import { Firestore, collection, doc, setDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Game } from 'src/models/game';
+import { AttributionWindowComponent } from '../attribution-window/attribution-window.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-start-screen',
@@ -11,7 +13,7 @@ import { Game } from 'src/models/game';
 export class StartScreenComponent {
 
   firestore: Firestore = inject(Firestore)
-  constructor(private router: Router) { }
+  constructor(public dialog: MatDialog, private router: Router) { }
 
   newGame() {
     let game = new Game();
@@ -19,5 +21,10 @@ export class StartScreenComponent {
     const id = "" + Date.now();
     setDoc(doc(itemCollection, id), game.toJson());
     this.router.navigateByUrl('/game/' + id);
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AttributionWindowComponent);
+    dialogRef.afterClosed().subscribe
   }
 }

@@ -22,6 +22,7 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { PlayerPictureComponent } from './player-picture/player-picture.component';
 import { EditPlayerComponent } from './edit-player/edit-player.component';
 import { Game } from 'src/models/game';
+import { AttributionWindowComponent } from './attribution-window/attribution-window.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { Game } from 'src/models/game';
     DialogAddPlayerComponent,
     GameTaskCardComponent,
     PlayerPictureComponent,
-    EditPlayerComponent
+    EditPlayerComponent,
+    AttributionWindowComponent
   ],
   imports: [
     BrowserModule,

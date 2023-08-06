@@ -76,6 +76,7 @@ export class GameComponent implements OnInit {
     });
   }
 
+
   openDialogForPicture(name: string): void {
     const dialogRef = this.dialog.open(PlayerPictureComponent);
     dialogRef.afterClosed().subscribe(picture => {
@@ -96,15 +97,15 @@ export class GameComponent implements OnInit {
 
 
   openDialogEditPlayer(i: number): void {
-    const dialogRef = this.handleDialogEditPlayerOpen(i)
+    const dialogRef = this.initiateEditPlayerDialog(i)
     dialogRef.afterClosed().subscribe((edit) => {
-      this.handleDialogEditPlayerClose(edit, i);
+      this.updatePlayerFromEditDialog(edit, i);
     });
     this.updateGame();
   }
 
 
-  handleDialogEditPlayerOpen(i: number) {
+  initiateEditPlayerDialog(i: number) {
     return this.dialog.open(EditPlayerComponent, {
       data: {
         playerIndex: i,
@@ -114,8 +115,8 @@ export class GameComponent implements OnInit {
     });
   }
 
-  
-  handleDialogEditPlayerClose(edit: any, i: number) {
+
+  updatePlayerFromEditDialog(edit: any, i: number) {
     if (!edit) return;
       else if (edit.name == '' && edit.picture.length > 0) {
         this.game.players_picture[i] = edit.picture;
@@ -132,5 +133,4 @@ export class GameComponent implements OnInit {
     const itemDoc = doc(this.firestore, 'games', this.gameId);
     updateDoc(itemDoc, this.game.toJson());
   }
-
 }

@@ -32,3 +32,19 @@
         filter: brightness(1.1);
     }
 }
+
+.attribution_btn {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #C19100;
+    padding: 5px 8px 5px 8px;
+    font-weight: bold;
+    cursor: pointer;
+    
+    &:hover {
+        filter: brightness(1.15);
+    }
+}

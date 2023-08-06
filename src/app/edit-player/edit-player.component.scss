@@ -6,11 +6,15 @@
     img {
         width: 60px;
         height: 60px;
-        margin: 0 3px 0 3px;
+        margin: 0 3px 6px 3px;
         cursor: pointer;
 
         &:hover {
             filter: brightness(1.25);
         }
     }
+}
+
+.content_container {
+    padding: 20px 24px 0px 24px;
 }
