@@ -23,6 +23,8 @@ import { PlayerPictureComponent } from './player-picture/player-picture.componen
 import { EditPlayerComponent } from './edit-player/edit-player.component';
 import { Game } from 'src/models/game';
 import { AttributionWindowComponent } from './attribution-window/attribution-window.component';
+import { MenuBarComponent } from './menu-bar/menu-bar.component';
+import { RestartGameComponent } from './restart-game/restart-game.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { AttributionWindowComponent } from './attribution-window/attribution-win
     GameTaskCardComponent,
     PlayerPictureComponent,
     EditPlayerComponent,
-    AttributionWindowComponent
+    AttributionWindowComponent,
+    MenuBarComponent,
+    RestartGameComponent
   ],
   imports: [
     BrowserModule,

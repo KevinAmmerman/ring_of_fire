@@ -6,7 +6,6 @@ import { Firestore, doc, docData, updateDoc } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { PlayerPictureComponent } from '../player-picture/player-picture.component';
 import { EditPlayerComponent } from '../edit-player/edit-player.component';
-import {Clipboard} from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-game',
@@ -19,7 +18,7 @@ export class GameComponent implements OnInit {
   gameId: string;
   firestore: Firestore = inject(Firestore)
 
-  constructor(public dialog: MatDialog, private route: ActivatedRoute, private clipboard: Clipboard) { }
+  constructor(public dialog: MatDialog, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.newGame()
@@ -135,7 +134,4 @@ export class GameComponent implements OnInit {
     updateDoc(itemDoc, this.game.toJson());
   }
 
-  copyLink() {
-    this.clipboard.copy(window.location.href);
-  }
 }

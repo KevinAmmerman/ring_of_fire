@@ -1,16 +1,17 @@
-<app-player [class.player_active]="i == game.currentPlayer" (click)="openDialogEditPlayer(i)" *ngFor="let player of game.players; let i = index" [data]="{'name': player, 'index': i, 'playersCount': game.players.length, 'player_avatar': game.players_picture[i]}" [playerActive]="i == game.currentPlayer"
-    class="player_position"></app-player>
+<app-player [class.player_active]="i == game.currentPlayer" (click)="openDialogEditPlayer(i)"
+    *ngFor="let player of game.players; let i = index"
+    [data]="{'name': player, 'index': i, 'playersCount': game.players.length, 'player_avatar': game.players_picture[i]}"
+    [playerActive]="i == game.currentPlayer" class="player_position"></app-player>
 <div class="game_field">
     <div class="card_stack">
         <!-- Card-stack -->
         <img *ngFor="let c of [0,1,2,3]; let i = index;" [ngStyle]="{'right.px': i * 5}"
             src="assets/img/cards/card_back.png" alt="">
-        <img *ngIf="game.players.length > 0" (click)="takeCard()" class="top_card" style="right: 20px" src="assets/img/cards/card_back.png"
-            alt="">
+        <img *ngIf="game.players.length > 0" (click)="takeCard()" class="top_card" style="right: 20px"
+            src="assets/img/cards/card_back.png" alt="">
 
         <!-- stack for played cards -->
-        <img *ngFor="let card of game.playedCards" class="playedCards" src="assets/img/cards/{{ card }}.png"
-            alt="">
+        <img *ngFor="let card of game.playedCards" class="playedCards" src="assets/img/cards/{{ card }}.png" alt="">
 
         <!-- Current Card for animation -->
         <img *ngIf="game.pickCardAnimation" [class.pick_card]="game.pickCardAnimation" style="right: 20px"
@@ -21,8 +22,5 @@
 <app-game-task-card [card]="game.currentCard" class="stick_bottom"></app-game-task-card>
 <button class="add_player_btn" (click)="openDialog()" mat-fab color="primary">
     <mat-icon>add</mat-icon>
-  </button>
-  <button class="link_btn" mat-fab color="primary" (click)="copyLink()">
-    <mat-icon>content_copy</mat-icon>
-    Share Link  
-  </button>
+</button>
+<app-menu-bar></app-menu-bar>

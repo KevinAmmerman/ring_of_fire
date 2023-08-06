@@ -73,20 +73,13 @@
     bottom: 32px;
 }
 
-.link_btn {
-    position: absolute;
-    top: 32px;
-    right: 32px;
-    color: white;
-    padding: 10px;
-}
-
 .stick_bottom {
     position: absolute;
     bottom: 32px;
     left: 100px;
     right: 125px;
 }
+
 
 @media (max-width: 800px) {
 
@@ -100,4 +93,9 @@
     .add_player_btn {
         bottom: 150px;
     }
+
+    // .link_btn {
+    //     top: 16px;
+    //     right: 32px;
+    // }
 }
