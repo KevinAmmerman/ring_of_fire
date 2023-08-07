@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Game } from 'src/models/game';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
@@ -15,7 +15,7 @@ import { EditPlayerComponent } from '../edit-player/edit-player.component';
 export class GameComponent implements OnInit {
   playerPictures: string[] = ['person.png', 'player_one_f.png', 'player_one_m.png', 'player_two_f.png', 'player_two_m.png', 'player_three_f.png', 'player_three_m.png'];
   game: Game;
-  gameId: string;
+  public gameId: string;
   firestore: Firestore = inject(Firestore)
 
   constructor(public dialog: MatDialog, private route: ActivatedRoute) { }

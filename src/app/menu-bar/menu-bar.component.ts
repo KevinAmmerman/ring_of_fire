@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {Clipboard} from '@angular/cdk/clipboard';
+import { Component, ElementRef, HostListener, Input } from '@angular/core';
+import { Clipboard } from '@angular/cdk/clipboard';
 import { RestartGameComponent } from '../restart-game/restart-game.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -11,9 +11,17 @@ import { MatDialog } from '@angular/material/dialog';
 export class MenuBarComponent {
 
   menuOpen: boolean = false;
+  @Input() gameId: string;
 
-  constructor(private clipboard: Clipboard, public dialog: MatDialog) {
-    this.menuOpen = false; 
+  constructor(private clipboard: Clipboard, public dialog: MatDialog, private elementRef: ElementRef) {
+    this.menuOpen = false;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: any) {
+    if (!this.elementRef.nativeElement.contains(event.target)) {
+      this.menuOpen = false;
+    }
   }
 
   ngOnInit() {
@@ -28,8 +36,11 @@ export class MenuBarComponent {
   }
 
   restartGame(): void {
-    const dialogRef = this.dialog.open(RestartGameComponent);
-    dialogRef.afterClosed().subscribe
+    const dialogRef = this.dialog.open(RestartGameComponent, {
+      data: {
+        id: this.gameId
+      }
+    });
     this.menuOpen = false;
   }
 }
