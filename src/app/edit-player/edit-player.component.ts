@@ -13,10 +13,10 @@ export class EditPlayerComponent {
   playerPictures: string[] = ['person.png', 'player_one_f.png', 'player_one_m.png', 'player_two_f.png', 'player_two_m.png', 'player_three_f.png', 'player_three_m.png'];
   @Input() playerIndex: number;
 
-  constructor(@Inject(MAT_DIALOG_DATA) private data: any, private dialogRef: MatDialogRef<EditPlayerComponent>) {}
+  constructor(@Inject(MAT_DIALOG_DATA) private data: any, private dialogRef: MatDialogRef<EditPlayerComponent>) { }
 
   ngOnInit() {
-    this.playerIndex = this.data.playerIndex; 
+    this.playerIndex = this.data.playerIndex;
     this.game = this.data.game;
   }
 

@@ -23,7 +23,6 @@ export class GameComponent implements OnInit {
   ngOnInit(): void {
     this.newGame()
     this.route.params.subscribe((params) => {
-      console.log(params['id'])
       this.gameId = params['id'];
       const itemDoc = doc(this.firestore, 'games', this.gameId);
       docData(itemDoc).subscribe((game: any) => {
@@ -68,7 +67,6 @@ export class GameComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
-
     dialogRef.afterClosed().subscribe((name: string) => {
       if (name && name.length > 0) {
         this.openDialogForPicture(name);

@@ -26,6 +26,7 @@ export class GameTaskCardComponent {
   title = '';
   description = '';
 
+  
   ngOnChanges() {
     if(this.card) {
       let cardNumber:any = this.card.split('_')[1];
